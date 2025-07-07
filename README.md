@@ -2,6 +2,12 @@
 
 This example allows you to deploy a remote MCP server that doesn't require authentication on Cloudflare Workers. 
 
+## Features
+
+- **Calculator Tools**: Basic math operations (add, subtract, multiply, divide)
+- **Web Search**: Internet search capabilities using Perplexity AI
+- **Smart Text Analysis**: Automatically detects search intent in text and can trigger web searches
+
 ## Get started: 
 
 [![Deploy to Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/ai/tree/main/demos/remote-mcp-authless)
@@ -12,6 +18,34 @@ Alternatively, you can use the command line below to get the remote MCP Server c
 ```bash
 npm create cloudflare@latest -- my-mcp-server --template=cloudflare/ai/demos/remote-mcp-authless
 ```
+
+## Setup
+
+### Environment Variables
+
+To use the web search functionality, you'll need to set up a Perplexity API key:
+
+1. Get your API key from [Perplexity AI Settings](https://www.perplexity.ai/settings/api)
+2. Set the environment variable in your Cloudflare Workers dashboard:
+   - Go to your Workers dashboard
+   - Select your worker
+   - Go to Settings > Variables
+   - Add a new variable: `PERPLEXITY_API_KEY` with your API key
+
+### Available Tools
+
+1. **add**: Simple addition of two numbers
+2. **calculate**: Perform basic math operations (add, subtract, multiply, divide)
+3. **search**: Search the internet using Perplexity AI
+4. **analyze_text**: Analyze text for search intent and optionally perform automatic web searches
+
+### Search Trigger Words
+
+The `analyze_text` tool automatically detects these trigger words for web searches:
+- search, find, look up
+- what is, who is, where is, when is, how is  
+- latest, current, recent, news
+- information, details, about
 
 ## Customizing your MCP Server
 
@@ -48,3 +82,23 @@ Update with this configuration:
 ```
 
 Restart Claude and you should see the tools become available. 
+
+## Example Usage
+
+Once connected, you can use the tools in various ways:
+
+### Direct Web Search
+```
+Use the search tool to find information about "latest AI developments"
+```
+
+### Smart Text Analysis
+```
+Analyze this text: "What is the latest news about OpenAI?"
+```
+This will automatically detect search intent and perform a web search.
+
+### Combined Operations
+```
+Calculate 25 * 4 and then search for information about that number
+```
